@@ -69,14 +69,16 @@ var work = {
             title: 'Telecommunications Technician',
             location: 'Bulawayo Zimbabwe',
             dates: '1999/01/01-2008/09/30',
+            description: "Installation, maintanance & monitoring of network"
             url: 'telone.co.zw'
         },
-        
+
         {
             employer: 'United Nations World Food Programme',
             title: 'Telecommunications Associate',
             location: 'Harare Zimbabwe',
             dates: '2008/10/01-in progress',
+            description: "Installation, maintanance & monitoring of network"
             url: 'wfp.org'
         },
     ],
@@ -87,9 +89,10 @@ var work = {
 };
 
 
+// interface between the model(s) & the view(s)
 var octopus = {
     init: function() {
-        view.render();
+        viewHeader.render();
     },
 
     getName: function() {
@@ -100,21 +103,31 @@ var octopus = {
         return bio.role;
     },
 
-    getBio: function() {
-        return bio;
+    getEducation: function() {
+        return education.schools;
+    },
+
+    getOnlineCourses: function() {
+        return education.onlineCourses;
+    },
+
+};
+
+
+var viewHeader = {
+    render: function() {
+        var name = HTMLheaderName.replace('%data%', octopus.getName());
+        var role = HTMLheaderRole.replace('%data%', octopus.getRole());
+        var header = $('#header');
+        header.prepend(role);
+        header.prepend(name);
     }
 };
 
 
-var view = {
+var viewEducation = {
     render: function() {
-        // Do something
-        var forMattedName = HTMLheaderName.replace('%data%', octopus.getName());
-        var forMattedRole = HTMLheaderRole.replace('%data%', octopus.getRole());
-        var header = $('#header');
-        header.prepend(forMattedRole);
-        header.prepend(forMattedName);
-        // header.append(octopus.getBio());
+
     }
 }
 
