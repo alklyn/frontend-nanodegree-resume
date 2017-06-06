@@ -27,8 +27,8 @@ var education = {
             name: 'acme university',
             location: 'Harare',
             degree: 'Stuff',
-            majors: 'Computer stuff',
-            dates: '2000/01/03-2004/01/02',
+            majors: ['Computer stuff', 'Telecommunications'],
+            dates: '2000-2004',
             url: 'acme.ac.zw'
         }
     ],
@@ -68,8 +68,8 @@ var work = {
             employer: 'Telone Private Limited',
             title: 'Telecommunications Technician',
             location: 'Bulawayo Zimbabwe',
-            dates: '1999/01/01-2008/09/30',
-            description: "Installation, maintanance & monitoring of network"
+            dates: '1999-2008',
+            description: "My roles included the installation, maintanance & monitoring of Telecommunications infrastructure. Management of the telephone billing system.",
             url: 'telone.co.zw'
         },
 
@@ -77,8 +77,8 @@ var work = {
             employer: 'United Nations World Food Programme',
             title: 'Telecommunications Associate',
             location: 'Harare Zimbabwe',
-            dates: '2008/10/01-in progress',
-            description: "Installation, maintanance & monitoring of network"
+            dates: '2008-in progress',
+            description: "Installation, maintanance & monitoring of network",
             url: 'wfp.org'
         },
     ],
@@ -93,6 +93,8 @@ var work = {
 var octopus = {
     init: function() {
         viewHeader.render();
+        viewWork.render();
+        viewEducation.render();
     },
 
     getName: function() {
@@ -103,12 +105,16 @@ var octopus = {
         return bio.role;
     },
 
-    getEducation: function() {
+    getSchools: function() {
         return education.schools;
     },
 
     getOnlineCourses: function() {
         return education.onlineCourses;
+    },
+
+    getJobs: function() {
+        return work.jobs;
     },
 
 };
@@ -125,9 +131,42 @@ var viewHeader = {
 };
 
 
+var viewWork = {
+    render: function() {
+        console.log(HTMLworkEmployer);
+        var workExperience = $('#workExperience');
+        var work = octopus.getJobs();
+
+        var employer = HTMLworkEmployer.replace('%data%', work[1].employer);
+        var title = HTMLworkTitle.replace('%data%', work[1].title);
+        var description = HTMLworkDescription.replace('%data%', work[1].description);
+        var dates = HTMLworkDates.replace('%data%', work[1].dates);
+        var location = HTMLlocation.replace('%data%', work[1].location);
+
+        workExperience.append(employer + location + HTMLworkStart + title + description + dates);
+        console.log(workExperience);
+    }
+}
+
 var viewEducation = {
     render: function() {
+        console.log(HTMLworkEmployer);
+        var education = $('#education');
+        var schools = octopus.getSchools();
 
+        var name = HTMLschoolName.replace('%data%', schools[0].name);
+        var location = HTMLschoolLocation.replace('%data%', schools[0].location);
+
+        var majors = '';
+        schools[0].majors.forEach(function(major){
+            majors += HTMLschoolMajor.replace('%data%', major);
+        });
+
+
+        var dates = HTMLschoolDates.replace('%data%', schools[0].dates.split('-')[0]);
+        var degree = HTMLschoolDegree.replace('%data%', schools[0].degree);
+
+        education.append(HTMLschoolStart + name + location + degree + majors + dates)
     }
 }
 
