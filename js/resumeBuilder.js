@@ -22,41 +22,41 @@ var bio = {
 
 
 var education = {
-    schools: [
+    "schools": [
         {
-            name: 'acme university',
-            location: 'Harare',
-            degree: 'Stuff',
-            majors: ['Computer stuff', 'Telecommunications'],
-            dates: '2000-2004',
-            url: 'acme.ac.zw'
+            "name": "acme university",
+            "location": "Harare",
+            "degree": "Stuff",
+            "majors": ["Computer stuff", "Telecommunications"],
+            "dates": "2000-2004",
+            "url": "acme.ac.zw"
         }
     ],
 
-    onlineCourses: [
+    "onlineCourses": [
         {
-            title: 'Intoduction To Git And Github',
-            school: 'Udacity',
-            dates: '2015-2015',
-            url: 'udacity.com'
+            "title": "Intoduction To Git And Github",
+            "school": "Udacity",
+            "dates": "2015-2015",
+            "url": "udacity.com"
         },
 
         {
-            title: 'Intoduction To Programming NanoDegree',
-            school: 'Udacity',
-            dates: '2015-2016',
-            url: 'udacity.com'
+            "title": "Intoduction To Programming NanoDegree",
+            "school": "Udacity",
+            "dates": "2015-2016",
+            "url": "udacity.com"
         },
 
         {
-            title: 'Fullstack Development NanoDegree',
-            school: 'Udacity',
-            dates: '2015-2016',
-            url: 'udacity.com'
+            "title": "Fullstack Development NanoDegree",
+            "school": "Udacity",
+            "dates": "2015-2016",
+            "url": "udacity.com"
         }
     ],
 
-    display: function(){
+    "display": function(){
         // Do something
     }
 };
@@ -65,22 +65,38 @@ var education = {
 var work = {
     jobs: [
         {
-            employer: 'Telone Private Limited',
-            title: 'Telecommunications Technician',
-            location: 'Bulawayo Zimbabwe',
-            dates: '1999-2008',
+            employer: "Telone Private Limited",
+            title: "Telecommunications Technician",
+            location: "Bulawayo Zimbabwe",
+            dates: "1999-2008",
             description: "My roles included the installation, maintanance & monitoring of Telecommunications infrastructure. Management of the telephone billing system.",
-            url: 'telone.co.zw'
+            url: "telone.co.zw"
         },
 
         {
-            employer: 'United Nations World Food Programme',
-            title: 'Telecommunications Associate',
-            location: 'Harare Zimbabwe',
-            dates: '2008-in progress',
+            employer: "United Nations World Food Programme",
+            title: "Telecommunications Associate",
+            location: "Harare Zimbabwe",
+            dates: "2008-in progress",
             description: "Installation, maintanance & monitoring of network",
-            url: 'wfp.org'
+            url: "wfp.org"
         },
+    ],
+
+    display: function(){
+        // Do something
+    }
+};
+
+
+var projects = {
+    projects: [
+        {
+            title: "Movie website",
+            dates: "2016-2016",
+            description: "A Movie Trailer Website where users can see my favorite movies and watch the trailers.",
+            images: ["images/movie_website_00.png", "images/movie_website_01.png", "images/movie_website_02.png"]
+        }
     ],
 
     display: function(){
@@ -95,6 +111,7 @@ var octopus = {
         viewHeader.render();
         viewWork.render();
         viewEducation.render();
+        viewProjects.render();
     },
 
     getName: function() {
@@ -116,6 +133,10 @@ var octopus = {
     getJobs: function() {
         return work.jobs;
     },
+
+    getProjects: function() {
+        return projects.projects;
+    }
 
 };
 
@@ -144,13 +165,13 @@ var viewWork = {
         var location = HTMLlocation.replace('%data%', work[1].location);
 
         workExperience.append(employer + location + HTMLworkStart + title + description + dates);
-        console.log(workExperience);
+        // console.log(workExperience);
     }
 }
 
 var viewEducation = {
     render: function() {
-        console.log(HTMLworkEmployer);
+        // console.log(HTMLworkEmployer);
         var education = $('#education');
         var schools = octopus.getSchools();
 
@@ -163,11 +184,28 @@ var viewEducation = {
         });
 
 
-        var dates = HTMLschoolDates.replace('%data%', schools[0].dates.split('-')[0]);
+        var dates = HTMLschoolDates.replace('%data%', schools[0].dates);
         var degree = HTMLschoolDegree.replace('%data%', schools[0].degree);
 
         education.append(HTMLschoolStart + name + location + degree + majors + dates)
     }
 }
+
+
+var viewProjects = {
+    render: function() {
+        var projects = $('#projects');
+        var myProjects = octopus.getProjects();
+
+        var title = HTMLprojectTitle.replace('%data%', myProjects[0].title);
+        var dates = HTMLprojectDates.replace('%data%', myProjects[0].dates);
+        var description = HTMLprojectDescription.replace('%data%', myProjects[0].description);
+        var image = HTMLprojectImage.replace('%data%', myProjects[0].images[0]);
+
+        projects.append(HTMLprojectStart + title + description + image + dates);
+        console.log(projects);
+    }
+};
+
 
 octopus.init();
