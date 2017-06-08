@@ -4,16 +4,17 @@ This is empty on purpose! Your code to build the resume will go here.
 
 
 var bio = {
-    name: 'Alpheus Masanga',
-    role: 'Full Stack Web Developer',
+    name: "Alpheus Masanga",
+    role: "Full Stack Web Developer",
     contacts: {
-        'mobile': '+263772131313',
-        'email': 'mr_sexy@acme.com',
-        'location': 'Harare',
+        "mobile": "+263772131313",
+        "email": "alklyn@gmail.com",
+        "github": "https://github.com/alklyn",
+        "location": "Harare",
     },
-    welcomeMessage: 'Hello',
-    skills: ['HTML', 'CSS', 'JavaScript', 'Python', 'Flask', 'Linux'],
-    biopic: 'https://scontent.fjnb3-1.fna.fbcdn.net/v/t1.0-9/23551_316884118685_4135470_n.jpg?oh=e51fc0a15a4b9365f60f8959f4745e29&oe=59E242EE',
+    welcomeMessage: "Hello",
+    skills: ["HTML", "CSS", "JavaScript", "Python", "Flask", "Linux"],
+    biopic: "https://scontent.fjnb3-1.fna.fbcdn.net/v/t1.0-9/23551_316884118685_4135470_n.jpg?oh=e51fc0a15a4b9365f60f8959f4745e29&oe=59E242EE",
 
     display: function(){
         // Do something
@@ -114,14 +115,6 @@ var octopus = {
         viewProjects.render();
     },
 
-    getName: function() {
-        return bio.name;
-    },
-
-    getRole: function() {
-        return bio.role;
-    },
-
     getSchools: function() {
         return education.schools;
     },
@@ -136,25 +129,61 @@ var octopus = {
 
     getProjects: function() {
         return projects.projects;
-    }
+    },
 
+    getName: function() {
+        return bio.name;
+    },
+
+    getRole: function() {
+        return bio.role;
+    },
+
+    getBioPic: function() {
+        return bio.biopic;
+    },
+
+    getSkills: function() {
+        return bio.skills;
+    },
+
+    getContacts: function() {
+        return bio.contacts;
+    }
 };
 
 
 var viewHeader = {
     render: function() {
+        var contactMe = $("#footerContacts");
+
         var name = HTMLheaderName.replace('%data%', octopus.getName());
         var role = HTMLheaderRole.replace('%data%', octopus.getRole());
+        var pic = HTMLbioPic.replace('%data%', octopus.getBioPic());
+        // var role = HTMLheaderRole.replace('%data%', octopus.getRole());
+
+        contacts = "";
+        var myContactInfo = octopus.getContacts();
+        mobile = HTMLmobile.replace('%data%', myContactInfo.mobile);
+        email = HTMLemail.replace('%data%', myContactInfo.email);
+        github = HTMLgithub.replace('%data%', myContactInfo.github);
+
+        contacts += mobile;
+        contacts += email;
+        contacts += github;
+        contactMe.append(contacts);
+
         var header = $('#header');
         header.prepend(role);
         header.prepend(name);
+        header.append(pic);
     }
 };
 
 
 var viewWork = {
     render: function() {
-        console.log(HTMLworkEmployer);
+        // console.log(HTMLworkEmployer);
         var workExperience = $('#workExperience');
         var work = octopus.getJobs();
 
