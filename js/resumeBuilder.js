@@ -183,14 +183,12 @@ var viewHeader = {
         skills = "";
 
         if(mySkills.length > 0){
-            mySkills.forEach(function(skill) {
-                skills += HTMLskills.replace('%data%', skill);
-            });
             header.append(HTMLskillsStart);
             var skillsElem = $("#skills");
-            skillsElem.append(skills);
-            console.log(skillsElem);
 
+            mySkills.forEach(function(skill) {
+                skillsElem.append(HTMLskills.replace('%data%', skill));
+            });
         }
         header.append(pic);
     }
