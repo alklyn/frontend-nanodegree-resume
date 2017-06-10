@@ -179,8 +179,7 @@ var viewHeader = {
 
         var mySkills = octopus.getSkills();
         console.log(mySkills);
-        mySkills = [];
-        var skillsElem = $("#skills");
+
         skills = "";
 
         if(mySkills.length > 0){
@@ -188,8 +187,9 @@ var viewHeader = {
                 skills += HTMLskills.replace('%data%', skill);
             });
             header.append(HTMLskillsStart);
+            var skillsElem = $("#skills");
             skillsElem.append(skills);
-            // console.log(skillsElem);
+            console.log(skillsElem);
 
         }
         header.append(pic);
