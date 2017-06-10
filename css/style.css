@@ -219,3 +219,7 @@ span {
     display: block;
   }
 }
+
+img {
+    max-width: 50vw;
+}

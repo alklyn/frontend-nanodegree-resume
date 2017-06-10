@@ -176,6 +176,22 @@ var viewHeader = {
         var header = $('#header');
         header.prepend(role);
         header.prepend(name);
+
+        var mySkills = octopus.getSkills();
+        console.log(mySkills);
+        mySkills = [];
+        var skillsElem = $("#skills");
+        skills = "";
+
+        if(mySkills.length > 0){
+            mySkills.forEach(function(skill) {
+                skills += HTMLskills.replace('%data%', skill);
+            });
+            header.append(HTMLskillsStart);
+            skillsElem.append(skills);
+            // console.log(skillsElem);
+
+        }
         header.append(pic);
     }
 };
@@ -193,8 +209,10 @@ var viewWork = {
         var dates = HTMLworkDates.replace('%data%', work[1].dates);
         var location = HTMLlocation.replace('%data%', work[1].location);
 
-        workExperience.append(employer + location + HTMLworkStart + title + description + dates);
-        // console.log(workExperience);
+        workExperience.append(HTMLworkStart);
+        var workDiv = $(".work-entry");
+        // console.log(workDiv);
+        workDiv.append(employer + dates + title + description + location);
     }
 }
 
@@ -216,7 +234,7 @@ var viewEducation = {
         var dates = HTMLschoolDates.replace('%data%', schools[0].dates);
         var degree = HTMLschoolDegree.replace('%data%', schools[0].degree);
 
-        education.append(HTMLschoolStart + name + location + degree + majors + dates)
+        education.append(HTMLschoolStart + dates + name + location + degree + majors)
     }
 }
 
@@ -232,7 +250,7 @@ var viewProjects = {
         var image = HTMLprojectImage.replace('%data%', myProjects[0].images[0]);
 
         projects.append(HTMLprojectStart + title + description + image + dates);
-        console.log(projects);
+        // console.log(projects);
     }
 };
 
