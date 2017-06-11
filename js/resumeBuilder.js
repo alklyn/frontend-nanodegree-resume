@@ -70,7 +70,7 @@ var work = {
             title: "Telecommunications Technician",
             location: "Bulawayo Zimbabwe",
             dates: "1999-2008",
-            description: "My roles included the installation, maintanance & monitoring of Telecommunications infrastructure. Management of the telephone billing system.",
+            description: "Installation, maintanance & monitoring of network",
             url: "telone.co.zw"
         },
 
@@ -79,7 +79,7 @@ var work = {
             title: "Telecommunications Associate",
             location: "Harare Zimbabwe",
             dates: "2008-in progress",
-            description: "Installation, maintanance & monitoring of network",
+            description: "My roles included the installation, maintanance & monitoring of Telecommunications infrastructure. Management of the telephone billing system.",
             url: "wfp.org"
         },
     ],
@@ -201,16 +201,18 @@ var viewWork = {
         var workExperience = $('#workExperience');
         var work = octopus.getJobs();
 
-        var employer = HTMLworkEmployer.replace('%data%', work[1].employer);
-        var title = HTMLworkTitle.replace('%data%', work[1].title);
-        var description = HTMLworkDescription.replace('%data%', work[1].description);
-        var dates = HTMLworkDates.replace('%data%', work[1].dates);
-        var location = HTMLlocation.replace('%data%', work[1].location);
+        for(i in work) {
+            var employer = HTMLworkEmployer.replace('%data%', work[i].employer);
+            var title = HTMLworkTitle.replace('%data%', work[i].title);
+            var description = HTMLworkDescription.replace('%data%', work[i].description);
+            var dates = HTMLworkDates.replace('%data%', work[i].dates);
+            var location = HTMLlocation.replace('%data%', work[i].location);
 
-        workExperience.append(HTMLworkStart);
-        var workDiv = $(".work-entry");
-        // console.log(workDiv);
-        workDiv.append(employer + dates + title + description + location);
+            workExperience.append(HTMLworkStart);
+            $(".work-entry").eq(i).append(employer + title + dates + description + location);
+            console.log('i = ' + i);
+            console.log($(".work-entry").eq(i));
+        }
     }
 }
 
