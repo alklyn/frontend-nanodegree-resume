@@ -97,7 +97,13 @@ var projects = {
             dates: "2016-2016",
             description: "A Movie Trailer Website where users can see my favorite movies and watch the trailers.",
             images: ["images/movie_website_00.png", "images/movie_website_01.png", "images/movie_website_02.png"]
-        }
+        },
+        {
+            title: "Movie website",
+            dates: "2016-2016",
+            description: "A Movie Trailer Website where users can see my favorite movies and watch the trailers.",
+            images: ["images/movie_website_00.png", "images/movie_website_01.png", "images/movie_website_02.png"]
+        },
     ],
 
     display: function(){
@@ -201,12 +207,12 @@ var viewWork = {
         var workExperience = $('#workExperience');
         var work = octopus.getJobs();
 
-        for(i in work) {
-            var employer = HTMLworkEmployer.replace('%data%', work[i].employer);
-            var title = HTMLworkTitle.replace('%data%', work[i].title);
-            var description = HTMLworkDescription.replace('%data%', work[i].description);
-            var dates = HTMLworkDates.replace('%data%', work[i].dates);
-            var location = HTMLlocation.replace('%data%', work[i].location);
+        work.forEach(function(job) {
+            var employer = HTMLworkEmployer.replace('%data%', job.employer);
+            var title = HTMLworkTitle.replace('%data%', job.title);
+            var description = HTMLworkDescription.replace('%data%', job.description);
+            var dates = HTMLworkDates.replace('%data%', job.dates);
+            var location = HTMLlocation.replace('%data%', job.location);
 
             workExperience.append(HTMLworkStart);
             // $(".work-entry").eq(i).append(employer + title + dates + description + location);
@@ -215,7 +221,7 @@ var viewWork = {
             $(".work-entry:last").append(employer + title + dates + description + location);
             // console.log('i = ' + i);
             // console.log($(".work-entry").eq(i));
-        }
+        });
     }
 }
 
