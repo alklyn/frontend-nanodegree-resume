@@ -178,7 +178,7 @@ var viewHeader = {
         header.prepend(name);
 
         var mySkills = octopus.getSkills();
-        console.log(mySkills);
+        // console.log(mySkills);
 
         skills = "";
 
@@ -209,9 +209,12 @@ var viewWork = {
             var location = HTMLlocation.replace('%data%', work[i].location);
 
             workExperience.append(HTMLworkStart);
-            $(".work-entry").eq(i).append(employer + title + dates + description + location);
-            console.log('i = ' + i);
-            console.log($(".work-entry").eq(i));
+            // $(".work-entry").eq(i).append(employer + title + dates + description + location);
+
+            // Does the exact same thing as the code above
+            $(".work-entry:last").append(employer + title + dates + description + location);
+            // console.log('i = ' + i);
+            // console.log($(".work-entry").eq(i));
         }
     }
 }
