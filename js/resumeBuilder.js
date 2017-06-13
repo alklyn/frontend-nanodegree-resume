@@ -124,10 +124,10 @@ var projects = {
             images: ["images/movie_website_00.png", "images/movie_website_01.png", "images/movie_website_02.png"]
         },
         {
-            title: "Movie website",
-            dates: "2016-2016",
-            description: "A Movie Trailer Website where users can see my favorite movies and watch the trailers.",
-            images: ["images/movie_website_00.png", "images/movie_website_01.png", "images/movie_website_02.png"]
+            title: "Item Catalog",
+            dates: "2017-2017",
+            description: "A simple web based catalog app..",
+            images: ["images/catalog00.png", "images/catalog01.png", "images/catalog02.png"]
         },
     ],
 
@@ -308,16 +308,22 @@ var viewEducation = {
 
 var viewProjects = {
     render: function() {
-        var projects = $('#projects');
+        var projectsDiv = $('#projects');
         var myProjects = octopus.getProjects();
 
-        var title = HTMLprojectTitle.replace('%data%', myProjects[0].title);
-        var dates = HTMLprojectDates.replace('%data%', myProjects[0].dates);
-        var description = HTMLprojectDescription.replace('%data%', myProjects[0].description);
-        var image = HTMLprojectImage.replace('%data%', myProjects[0].images[0]);
+        myProjects.forEach(function(project, i) {
+            var title = HTMLprojectTitle.replace('%data%', project.title);
+            var dates = HTMLprojectDates.replace('%data%', project.dates);
+            var description = HTMLprojectDescription.replace('%data%', project.description);
 
-        projects.append(HTMLprojectStart + title + description + image + dates);
-        // console.log(projects);
+            var formattedImages = [];
+            project.images.forEach(function(image) {
+                formattedImages.push(HTMLprojectImage.replace('%data%', image));
+            });
+            projectsDiv.append(HTMLprojectStart);
+            $(".project-entry").eq(i).append(title + dates + description + formattedImages);
+        });
+
     }
 };
 
