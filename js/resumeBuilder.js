@@ -234,8 +234,9 @@ var viewHeader = {
         header.append(pic);
     },
 
-    inName: function(name) {
+    inName: function() {
         //Internationalize the name.
+        var name = octopus.getName();
         var nameArr = name.split(" ");
         console.log(nameArr);
         nameArr[0] = this.capitalize(nameArr[0]);
