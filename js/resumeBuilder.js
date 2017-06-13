@@ -18,7 +18,7 @@ var bio = {
 
     display: function(){
         // Do something
-    }
+    },
 };
 
 
@@ -82,10 +82,35 @@ var work = {
             description: "My roles included the installation, maintanance & monitoring of Telecommunications infrastructure. Management of the telephone billing system.",
             url: "wfp.org"
         },
+        {
+            employer: "United Nations World Food Programme",
+            title: "Telecommunications Associate",
+            location: "Monrovia Liberia",
+            dates: "2015-2015",
+            description: "Installation of web based billing, transport requisition & document tracking system.",
+            url: "wfp.org"
+        },
+        {
+            employer: "United Nations World Food Programme",
+            title: "Telecommunications Associate",
+            location: "Niamey Niger",
+            dates: "2015-2015",
+            description: "Installation of web based billing, transport requisition & document tracking system.",
+            url: "wfp.org"
+        }
     ],
 
     display: function(){
         // Do something
+    },
+
+    locationizer: function(){
+        //Create an array of all the locations that I have worked
+        locations = [];
+        this.jobs.forEach(function(job) {
+            locations.push(job.location);
+        });
+        return locations
     }
 };
 
@@ -115,7 +140,8 @@ var projects = {
 // interface between the model(s) & the view(s)
 var octopus = {
     init: function() {
-        viewHeader.render();
+        viewHeader.render(false);
+        viewMain.render();
         viewWork.render();
         viewEducation.render();
         viewProjects.render();
@@ -155,15 +181,24 @@ var octopus = {
 
     getContacts: function() {
         return bio.contacts;
+    },
+
+    getLocatons: function() {
+        return work.locationizer();
     }
 };
 
 
 var viewHeader = {
-    render: function() {
+    render: function(internationalize) {
         var contactMe = $("#footerContacts");
 
-        var name = HTMLheaderName.replace('%data%', octopus.getName());
+        var name = octopus.getName();
+        if(internationalize){
+            name = this.inName(name);
+        }
+        var formattedName = HTMLheaderName.replace('%data%', name);
+
         var role = HTMLheaderRole.replace('%data%', octopus.getRole());
         var pic = HTMLbioPic.replace('%data%', octopus.getBioPic());
         // var role = HTMLheaderRole.replace('%data%', octopus.getRole());
@@ -181,7 +216,7 @@ var viewHeader = {
 
         var header = $('#header');
         header.prepend(role);
-        header.prepend(name);
+        header.prepend(formattedName);
 
         var mySkills = octopus.getSkills();
         // console.log(mySkills);
@@ -197,6 +232,28 @@ var viewHeader = {
             });
         }
         header.append(pic);
+    },
+
+    inName: function(name) {
+        //Internationalize the name.
+        var nameArr = name.split(" ");
+        console.log(nameArr);
+        nameArr[0] = this.capitalize(nameArr[0]);
+        nameArr[1] = nameArr[1].toUpperCase();
+        return nameArr[0] + ' ' + nameArr[1];
+    },
+
+    capitalize: function(myStr) {
+        // Capitalize the 1st letter of a string
+        return myStr.charAt(0).toUpperCase() + myStr.slice(1).toLowerCase();
+    }
+};
+
+
+var viewMain = {
+    render: function() {
+        var main = $("#main");
+        main.append(internationalizeButton);
     }
 };
 
@@ -222,7 +279,7 @@ var viewWork = {
             // console.log('i = ' + i);
             // console.log($(".work-entry").eq(i));
         });
-    }
+    },
 }
 
 var viewEducation = {
@@ -265,3 +322,4 @@ var viewProjects = {
 
 
 octopus.init();
+// console.log(octopus.getLocatons());

@@ -65,7 +65,8 @@ The Internationalize Names challenge found in the lesson Flow Control from JavaS
 $(document).ready(function() {
   $('button').click(function() {
     var $name = $('#name');
-    var iName = inName($name.text()) || function(){};
+    console.log($name.text());
+    var iName = viewHeader.inName($name.text()) || function(){};
     $name.html(iName);
   });
 });
@@ -86,7 +87,7 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
+  logClicks(loc.pageX, loc.pageY);
 });
 
 
